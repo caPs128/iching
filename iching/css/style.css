@@ -1,0 +1,554 @@
+/* style.css — 六爻占卜全局样式 */
+
+:root {
+  --bg: #0a0a0f;
+  --surface: #12121a;
+  --surface2: #1a1a28;
+  --border: #2a2a3a;
+  --text: #e0e0e0;
+  --text-secondary: #888;
+  --accent: #e94560;
+  --accent-glow: rgba(233, 69, 96, 0.3);
+  --gold: #d4a574;
+  --yang: #e94560;
+  --yin: #4a9eff;
+  --changing: #ffd700;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans SC', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  line-height: 1.6;
+}
+
+#app {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* ===== 起卦页 ===== */
+.page-header {
+  text-align: center;
+  padding: 24px 0;
+  position: relative;
+}
+
+.page-header h1 {
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: var(--gold);
+}
+
+.page-header .subtitle {
+  font-size: 13px;
+  color: var(--text-secondary);
+  margin-top: 4px;
+}
+
+.settings-btn {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
+  font-size: 18px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.settings-btn:hover {
+  background: var(--surface2);
+  color: var(--text);
+}
+
+.category-section {
+  margin: 24px 0;
+}
+
+.section-label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--text-secondary);
+  margin-bottom: 12px;
+  text-align: center;
+}
+
+.category-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+}
+
+.pill {
+  padding: 8px 18px;
+  border-radius: 20px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text-secondary);
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.pill:hover {
+  border-color: var(--accent);
+  color: var(--text);
+}
+
+.pill.active {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+
+.cast-section {
+  text-align: center;
+  padding: 40px 0;
+}
+
+.taiji {
+  font-size: 80px;
+  margin-bottom: 16px;
+  opacity: 0.9;
+}
+
+.cast-section .hint {
+  font-size: 15px;
+  color: var(--text-secondary);
+  margin-bottom: 32px;
+}
+
+.cast-btn {
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  padding: 18px 56px;
+  border-radius: 30px;
+  font-size: 20px;
+  letter-spacing: 4px;
+  cursor: pointer;
+  transition: all 0.3s;
+  box-shadow: 0 0 30px var(--accent-glow);
+}
+
+.cast-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 50px var(--accent-glow);
+}
+
+.cast-btn:active {
+  transform: translateY(0);
+}
+
+.cast-note {
+  margin-top: 16px;
+  font-size: 12px;
+  color: #555;
+}
+
+/* ===== 摇钱动画 ===== */
+.casting-page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 80vh;
+}
+
+.casting-animation {
+  text-align: center;
+}
+
+.coins-container {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  margin-bottom: 32px;
+}
+
+.coin {
+  width: 64px;
+  height: 64px;
+  animation: coinBounce 0.6s ease-in-out infinite;
+}
+
+.coin1 { animation-delay: 0s; }
+.coin2 { animation-delay: 0.15s; }
+.coin3 { animation-delay: 0.3s; }
+
+@keyframes coinBounce {
+  0%, 100% { transform: translateY(0) rotateY(0deg); }
+  25%  { transform: translateY(-18px) rotateY(90deg); }
+  50%  { transform: translateY(0) rotateY(180deg); }
+  75%  { transform: translateY(-8px) rotateY(270deg); }
+}
+
+.casting-text {
+  font-size: 18px;
+  color: var(--gold);
+  letter-spacing: 2px;
+  margin-bottom: 8px;
+}
+
+.casting-subtitle {
+  font-size: 12px;
+  color: var(--text-secondary);
+  letter-spacing: 1px;
+  margin-bottom: 24px;
+}
+
+.casting-progress {
+  width: 200px;
+  height: 3px;
+  background: var(--border);
+  border-radius: 2px;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+.casting-bar {
+  height: 100%;
+  background: var(--gold);
+  border-radius: 2px;
+  animation: barFill 2.5s ease-out forwards;
+}
+
+@keyframes barFill {
+  0%   { width: 0%; }
+  100% { width: 100%; }
+}
+
+/* ===== 设置面板 ===== */
+.settings-panel {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 24px;
+  margin: 20px 0;
+}
+
+.settings-panel h3 {
+  margin-bottom: 16px;
+}
+
+.settings-panel label {
+  display: block;
+  font-size: 13px;
+  color: var(--text-secondary);
+  margin-bottom: 6px;
+}
+
+.settings-panel input {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg);
+  color: var(--text);
+  font-size: 14px;
+  margin-bottom: 12px;
+}
+
+.settings-panel button {
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  padding: 8px 24px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.settings-panel .hint {
+  font-size: 11px;
+  color: var(--text-secondary);
+  margin-top: 8px;
+}
+
+/* ===== 结果页 ===== */
+.back-btn {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
+  padding: 6px 14px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+.back-btn:hover {
+  background: var(--surface2);
+  color: var(--text);
+}
+
+.hexagram-hero {
+  text-align: center;
+  padding: 24px;
+  background: var(--surface);
+  border-radius: 16px;
+  border: 1px solid var(--border);
+  margin-bottom: 20px;
+}
+
+.hexagram-symbol {
+  font-size: 64px;
+  margin-bottom: 8px;
+}
+
+.hexagram-symbol.small {
+  font-size: 32px;
+}
+
+.hexagram-hero h2 {
+  font-size: 24px;
+  color: var(--gold);
+}
+
+.changed-hexagram {
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border);
+}
+
+.changed-hexagram .arrow {
+  font-size: 24px;
+  color: var(--accent);
+}
+
+.changed-hexagram h3 {
+  font-size: 18px;
+  color: var(--gold);
+  margin-top: 4px;
+}
+
+.changing-note {
+  font-size: 13px;
+  color: var(--changing);
+  margin-top: 4px;
+}
+
+.date-info {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  font-size: 13px;
+  color: var(--text-secondary);
+  padding: 12px;
+  background: var(--surface);
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+/* 六爻排盘表 */
+.lines-table {
+  margin-bottom: 24px;
+}
+
+.lines-table h3 {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--text-secondary);
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.table-wrapper {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+thead th {
+  color: var(--text-secondary);
+  font-weight: 500;
+  padding: 10px 8px;
+  border-bottom: 1px solid var(--border);
+  font-size: 11px;
+  letter-spacing: 1px;
+}
+
+tbody td {
+  padding: 10px 8px;
+  text-align: center;
+  border-bottom: 1px solid rgba(42, 42, 58, 0.5);
+}
+
+.changing-line {
+  background: rgba(255, 215, 0, 0.05);
+}
+
+.changing-line td {
+  color: var(--changing);
+}
+
+.changed-sub-row {
+  background: rgba(233, 69, 96, 0.04);
+  border-bottom: 2px solid rgba(233, 69, 96, 0.15);
+}
+
+.changed-sub-row td {
+  padding: 6px 8px;
+  font-size: 12px;
+  color: var(--accent);
+}
+
+.changing-hint {
+  font-size: 11px;
+  font-weight: normal;
+  color: var(--text-secondary);
+  letter-spacing: 0;
+}
+
+td.yang { color: var(--yang); }
+td.yin { color: var(--yin); }
+td.pos-name { color: var(--text-secondary); font-size: 12px; }
+
+/* 解读区域 */
+.interpretation {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 24px;
+  margin-bottom: 20px;
+}
+
+.interpretation h3 {
+  font-size: 16px;
+  margin-bottom: 16px;
+  color: var(--gold);
+}
+
+.interpretation-content {
+  font-size: 15px;
+  line-height: 1.9;
+  color: var(--text);
+}
+
+.interpretation-content strong {
+  color: var(--gold);
+}
+
+.interpretation-content .quote {
+  display: block;
+  margin: 10px 0;
+  padding: 10px 14px;
+  background: rgba(212, 167, 116, 0.08);
+  border-left: 3px solid var(--gold);
+  border-radius: 0 8px 8px 0;
+  color: #c9a87c;
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+.loading {
+  text-align: center;
+  color: var(--text-secondary);
+  padding: 20px;
+}
+
+.dots::after {
+  content: '';
+  animation: dots 1.5s infinite;
+}
+
+@keyframes dots {
+  0% { content: ''; }
+  33% { content: '.'; }
+  66% { content: '..'; }
+  100% { content: '...'; }
+}
+
+.no-api-key, .api-error {
+  text-align: center;
+  padding: 20px;
+  color: var(--text-secondary);
+}
+
+.no-api-key p, .api-error p {
+  margin-bottom: 8px;
+}
+
+/* 原文参考 */
+.original-text {
+  margin-bottom: 24px;
+}
+
+.original-text details {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 16px 20px;
+}
+
+.original-text summary {
+  cursor: pointer;
+  font-size: 13px;
+  color: var(--text-secondary);
+  letter-spacing: 1px;
+}
+
+.source-content {
+  margin-top: 16px;
+  font-size: 14px;
+  line-height: 2;
+  color: #aaa;
+}
+
+.source-content h4 {
+  color: var(--gold);
+  margin-top: 12px;
+  margin-bottom: 4px;
+  font-size: 13px;
+}
+
+.source-content .ai-quote {
+  margin: 6px 0 6px 8px;
+  padding: 6px 10px;
+  font-size: 13px;
+  color: #c9a87c;
+  border-left: 2px solid rgba(212, 167, 116, 0.3);
+  line-height: 1.7;
+}
+
+/* ===== 错误页 ===== */
+.error-page {
+  text-align: center;
+  padding: 80px 20px;
+  color: var(--text-secondary);
+}
+
+.error-detail {
+  font-size: 12px;
+  color: #555;
+  margin-top: 16px;
+}
+
+/* ===== 响应式 ===== */
+@media (max-width: 480px) {
+  #app { padding: 12px; }
+  .cast-btn { padding: 14px 40px; font-size: 18px; }
+  .hexagram-symbol { font-size: 48px; }
+  .taiji { font-size: 60px; }
+  table { font-size: 11px; }
+  thead th, tbody td { padding: 6px 4px; }
+}
